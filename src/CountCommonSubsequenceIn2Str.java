@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 public class CountCommonSubsequenceIn2Str {
     static int CommomSubsequencesCount(String s, String t)
     {
@@ -6,13 +6,13 @@ public class CountCommonSubsequenceIn2Str {
         int n2 = t.length();
         int dp[][] = new int [n1+1][n2+1];
         char ch1,ch2 ;
-       
+        
         for (int i = 0; i <= n1; i++) {
             for (int j = 0; j <= n2; j++) {
                 dp[i][j] = 0;
             }
         }
-       
+        
         for (int i = 0; i <= n1; i++) {
             for (int j = 0; j <= n2; j++) {
                 System.out.print(dp[i][j]+" "); 
@@ -51,10 +51,10 @@ public class CountCommonSubsequenceIn2Str {
     }
     // Driver code
     public static void main (String args[]){
-         
-          String s = "ajblqcpdz";
-          String t = "aefcnbtdi";
-           
+        Scanner sc = new Scanner(System.in); 
+        String s = sc.nextLine();
+        String t = sc.nextLine();
+          
         System.out.println(CommomSubsequencesCount(s, t));
            
     }

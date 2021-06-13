@@ -1,10 +1,46 @@
 import java.util.Scanner;
 public class NumToWords {
-    public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        String[] X = {"Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"};
-        String[] Y = {"","","Twenty","Thirty","Fourty","Fifty","Sixty","Seventy","Eighty","Ninety","Hundread"};
+    
+    private static final String EMPTY = "";
+    private static final String[] X = {EMPTY,"One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"};
+    private static final String[] Y = {EMPTY, EMPTY,"Twenty","Thirty","Fourty","Fifty","Sixty","Seventy","Eighty","Ninety","Hundread"};
+    
+    private static String convertToDigit(int n, String suffix)
+    {
+        if (n == 0) {
+            return EMPTY;
+        }
+
+        if (n > 19) {
+            return Y[n / 10] + X[n % 10] + suffix;
+        }
+        else {
+            return X[n] + suffix;
+        }
+    }
+    
+    public static String convert(int n)
+    {
+        StringBuilder res = new StringBuilder();
+
+        res.append(convertToDigit(((n / 100000) % 100), " Lakh "));
+        res.append(convertToDigit(((n / 1000) % 100), " Thousand "));
+        res.append(convertToDigit(((n / 100) % 10), " Hundred "));
         
+        if ((n > 100) && (n % 100 != 0)) {
+            res.append("and ");
+        }
+        
+        res.append(convertToDigit((n % 100), ""));
+
+        return res.toString();
+    }
+    
+    public static void main(String[] args){
+        int n;
+        System.out.println("Enter a number : ");
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        System.out.println(convert(n));
     }   
 }
